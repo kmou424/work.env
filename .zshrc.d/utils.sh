@@ -97,7 +97,7 @@ function checkCommand() {
     command -v $1 > /dev/null 2>&1
     if [ $? = 1 ]; then
         echo "$1 is not installed. Please install $1 and try again."
-        exit 1
+        return 1
     fi
 }
 
