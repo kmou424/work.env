@@ -107,3 +107,5 @@ load_script ~/.zshrc.d/proxy.sh
 load_script ~/.zshrc.d/network.sh
 
 load_script ~/.zshrc.d/tmux.sh
+
+load_script ~/.zshrc.d/hack.sh
