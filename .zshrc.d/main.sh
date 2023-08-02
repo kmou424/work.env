@@ -32,7 +32,11 @@ alias python='python3'
 alias linklib='sudo ldconfig /usr/local/lib'
 
 # For tmux
-alias tma='tmuxAuto'
+alias tma='tmux_auto_session'
+
+# Global constants
+true=0
+false=1
 
 # External root (for personal build program)
 export EXTERNAL_ROOT=~/external_root
@@ -41,42 +45,47 @@ export EXTERNAL_ROOT_LIB=$EXTERNAL_ROOT/lib
 export EXTRA_LD_LIBRARY_PATH=/usr/local/lib
 
 # Make sure external root is available
-if [ ! -d $EXTERNAL_ROOT_BIN ];then
+if [[ ! -d $EXTERNAL_ROOT_BIN ]]; then
     mkdir -p $EXTERNAL_ROOT_BIN
 fi
 
-if [ ! -d $EXTERNAL_ROOT_LIB ];then
+if [[ ! -d $EXTERNAL_ROOT_LIB ]]; then
     mkdir -p $EXTERNAL_ROOT_LIB
 fi
 
 function load_script() {
-    if [ -f "$1" ];then
-            chmod +x "$1"
-            . "$1"
+    if [[ -f "$1" ]]; then
+        chmod +x "$1"
+        . "$1"
     else
         # If forcing load
-        if [ $2 = 1 ];then
+        if [[ $2 = $false ]]; then
             echo "loading script: $1 failed!"
-            return 1
+            return $false
         fi
     fi
 }
 
+# Prepare logging
+load_script ~/.zshrc.d/logging.sh 1
+if [[ $? = $false ]]; then
+    return
+fi
+
 # Prepare utils
 load_script ~/.zshrc.d/utils.sh 1
-if [ $? = 1 ];
-then
+if [[ $? = $false ]]; then
     return
 fi
 
 # Add external root into PATH
-if [ "$(echo $PATH | grep ${EXTERNAL_ROOT_BIN} 2> /dev/null)" = "" ];then
-    pathcat $EXTERNAL_ROOT_BIN
+if [[ "$(echo $PATH | grep ${EXTERNAL_ROOT_BIN} 2>/dev/null)" = "" ]]; then
+    path_append $EXTERNAL_ROOT_BIN
 fi
 
 # Add user-build programs lib to ld library path
-if [ "$(echo $LD_LIBRARY_PATH | grep ${EXTRA_LD_LIBRARY_PATH} 2> /dev/null)" = "" ];then
-    if [ "${LD_LIBRARY_PATH}" = "" ];then
+if [[ "$(echo $LD_LIBRARY_PATH | grep ${EXTRA_LD_LIBRARY_PATH} 2>/dev/null)" = "" ]]; then
+    if [[ "${LD_LIBRARY_PATH}" = "" ]]; then
         export LD_LIBRARY_PATH="${EXTRA_LD_LIBRARY_PATH}"
     else
         export LD_LIBRARY_PATH="${EXTRA_LD_LIBRARY_PATH}:${LD_LIBRARY_PATH}"
@@ -84,8 +93,8 @@ if [ "$(echo $LD_LIBRARY_PATH | grep ${EXTRA_LD_LIBRARY_PATH} 2> /dev/null)" = "
 fi
 
 # Add external root user-build programs lib to ld library path
-if [ "$(echo $LD_LIBRARY_PATH | grep ${EXTERNAL_ROOT_LIB} 2> /dev/null)" = "" ];then
-    if [ "${LD_LIBRARY_PATH}" = "" ];then
+if [[ "$(echo $LD_LIBRARY_PATH | grep ${EXTERNAL_ROOT_LIB} 2>/dev/null)" = "" ]]; then
+    if [[ "${LD_LIBRARY_PATH}" = "" ]]; then
         export LD_LIBRARY_PATH="${EXTERNAL_ROOT_LIB}"
     else
         export LD_LIBRARY_PATH="${EXTERNAL_ROOT_LIB}:${LD_LIBRARY_PATH}"
@@ -93,14 +102,12 @@ if [ "$(echo $LD_LIBRARY_PATH | grep ${EXTERNAL_ROOT_LIB} 2> /dev/null)" = "" ];
 fi
 
 # python userspace bin
-pathcat "$HOME/.local/bin"
+path_append "$HOME/.local/bin"
 
 PATH_BAK=$PATH
 
 # Execute other scripts
 # load_script ~/.zshrc.d/mount_smb.sh
-
-load_script ~/.zshrc.d/static_ip.sh
 
 load_script ~/.zshrc.d/proxy.sh
 
@@ -109,3 +116,8 @@ load_script ~/.zshrc.d/network.sh
 load_script ~/.zshrc.d/tmux.sh
 
 load_script ~/.zshrc.d/hack.sh
+
+# For WSL
+if [[ -n "$WSL_DISTRO_NAME" ]]; then
+    load_script ~/.zshrc.d/wsl/static_ip.sh
+fi
