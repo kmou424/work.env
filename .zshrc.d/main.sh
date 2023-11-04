@@ -17,6 +17,7 @@ alias llsa='ls -lsa --color=auto'
 alias pacclean='sudo pacman -Scc'
 alias pacupgrade='sudo pacman -Syyu'
 alias pacman='sudo pacman'
+alias pacautoremove='pacman -Rs $(pacman -Qdtq)'
 
 # Git
 alias gpick='git cherry-pick'
