@@ -39,21 +39,6 @@ alias tma='tmux_auto_session'
 true=0
 false=1
 
-# External root (for personal build program)
-export EXTERNAL_ROOT=~/external_root
-export EXTERNAL_ROOT_BIN=$EXTERNAL_ROOT/bin
-export EXTERNAL_ROOT_LIB=$EXTERNAL_ROOT/lib
-export EXTRA_LD_LIBRARY_PATH=/usr/local/lib
-
-# Make sure external root is available
-if [[ ! -d $EXTERNAL_ROOT_BIN ]]; then
-    mkdir -p $EXTERNAL_ROOT_BIN
-fi
-
-if [[ ! -d $EXTERNAL_ROOT_LIB ]]; then
-    mkdir -p $EXTERNAL_ROOT_LIB
-fi
-
 function load_script() {
     if [[ -f "$1" ]]; then
         chmod +x "$1"
@@ -77,29 +62,6 @@ fi
 load_script ~/.zshrc.d/utils.sh 1
 if [[ $? = $false ]]; then
     return
-fi
-
-# Add external root into PATH
-if [[ "$(echo $PATH | grep ${EXTERNAL_ROOT_BIN} 2>/dev/null)" = "" ]]; then
-    path_append $EXTERNAL_ROOT_BIN
-fi
-
-# Add user-build programs lib to ld library path
-if [[ "$(echo $LD_LIBRARY_PATH | grep ${EXTRA_LD_LIBRARY_PATH} 2>/dev/null)" = "" ]]; then
-    if [[ "${LD_LIBRARY_PATH}" = "" ]]; then
-        export LD_LIBRARY_PATH="${EXTRA_LD_LIBRARY_PATH}"
-    else
-        export LD_LIBRARY_PATH="${EXTRA_LD_LIBRARY_PATH}:${LD_LIBRARY_PATH}"
-    fi
-fi
-
-# Add external root user-build programs lib to ld library path
-if [[ "$(echo $LD_LIBRARY_PATH | grep ${EXTERNAL_ROOT_LIB} 2>/dev/null)" = "" ]]; then
-    if [[ "${LD_LIBRARY_PATH}" = "" ]]; then
-        export LD_LIBRARY_PATH="${EXTERNAL_ROOT_LIB}"
-    else
-        export LD_LIBRARY_PATH="${EXTERNAL_ROOT_LIB}:${LD_LIBRARY_PATH}"
-    fi
 fi
 
 # python userspace bin
