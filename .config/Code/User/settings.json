@@ -5,6 +5,8 @@
   "editor.formatOnPaste": true,
   "editor.fontFamily": "JetBrains Mono, Consolas, 'Courier New', monospace",
   "editor.tabSize": 2,
+  "editor.indentSize": "tabSize",
+  "editor.insertSpaces": true,
 
   // theme
   "workbench.colorTheme": "JetBrains New Dark",
@@ -29,21 +31,27 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
-  "python.experiments.enabled": true,
   "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter",
-    "diffEditor.ignoreTrimWhitespace": false,
+    // "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.codeActionsOnSave": {
-      "source.fixAll.ruff": true,
-      "source.organizeImports.ruff": true
+      "source.fixAll": "explicit",
+      "source.organizeImports": "explicit"
     },
     "editor.formatOnType": true
   },
+  "python.analysis.autoImportCompletions": true,
+  "ruff.fixAll": true,
+  "ruff.organizeImports": false,
+  // diable linter for pyright, use ruff instead
+  "python.analysis.typeCheckingMode": "off",
+  // disable organize imports for pyright, use ruff instead
+  "pyright.disableOrganizeImports": true,
 
   "[go]": {
     "editor.defaultFormatter": "golang.go",
     "editor.codeActionsOnSave": {
-      "source.organizeImports": true
+      "source.organizeImports": "explicit"
     }
   },
 
