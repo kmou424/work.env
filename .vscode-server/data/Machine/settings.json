@@ -43,8 +43,10 @@
   "python.analysis.autoImportCompletions": true,
   "ruff.fixAll": true,
   "ruff.organizeImports": true,
-  // diable linter for pyright, use ruff instead
+  // diable linter for pylance, use ruff instead
   "python.analysis.typeCheckingMode": "off",
+  // ignore all errors and warnings with pylance, only use ruff
+  "python.analysis.ignore": ["*"],
 
   "[go]": {
     "editor.defaultFormatter": "golang.go",
