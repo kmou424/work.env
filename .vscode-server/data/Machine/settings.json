@@ -9,7 +9,7 @@
   "editor.insertSpaces": true,
 
   // theme
-  "workbench.colorTheme": "JetBrains New Dark",
+  "workbench.colorTheme": "JetBrains New UI Dark Theme",
   "workbench.iconTheme": "vscode-jetbrains-icon-theme-2023-auto",
   "workbench.productIconTheme": "jetbrains-idea-product-icon-theme",
 
@@ -42,20 +42,14 @@
   },
   "python.analysis.autoImportCompletions": true,
   "ruff.fixAll": true,
-  "ruff.organizeImports": false,
+  "ruff.organizeImports": true,
   // diable linter for pyright, use ruff instead
   "python.analysis.typeCheckingMode": "off",
-  // disable organize imports for pyright, use ruff instead
-  "pyright.disableOrganizeImports": true,
 
   "[go]": {
     "editor.defaultFormatter": "golang.go",
     "editor.codeActionsOnSave": {
       "source.organizeImports": "explicit"
     }
-  },
-
-  // fittencode
-  "fittencode.languagePreference.displayPreference": "zh-cn",
-  "fittencode.languagePreference.commentPreference": "zh-cn"
+  }
 }
