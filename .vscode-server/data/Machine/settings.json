@@ -11,7 +11,7 @@
   // theme
   "workbench.colorTheme": "JetBrains New UI Dark Theme",
   "workbench.iconTheme": "vscode-jetbrains-icon-theme-2023-auto",
-  "workbench.productIconTheme": "jetbrains-idea-product-icon-theme",
+  "workbench.productIconTheme": "Tabler",
 
   // terminal
   "terminal.integrated.fontFamily": "MesloLGS NF, Consolas, 'Courier New', monospace",
@@ -32,7 +32,6 @@
   },
 
   "[python]": {
-    // "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.codeActionsOnSave": {
       "source.fixAll": "explicit",
@@ -40,18 +39,28 @@
     },
     "editor.formatOnType": true
   },
+  // only use ruff as extended linter for python
+  "python.analysis.typeCheckingMode": "standard",
   "python.analysis.autoImportCompletions": true,
-  "ruff.fixAll": true,
-  "ruff.organizeImports": true,
-  // diable linter for pylance, use ruff instead
-  "python.analysis.typeCheckingMode": "off",
-  // ignore all errors and warnings with pylance, only use ruff
-  "python.analysis.ignore": ["*"],
 
   "[go]": {
     "editor.defaultFormatter": "golang.go",
     "editor.codeActionsOnSave": {
       "source.organizeImports": "explicit"
     }
-  }
+  },
+
+  "todo-tree.general.tags": [
+    "BUG",
+    "bug",
+    "HACK",
+    "hack",
+    "FIXME",
+    "fixme",
+    "TODO",
+    "todo"
+    // "XXX",
+    // "[ ]",
+    // "[x]"
+  ]
 }
