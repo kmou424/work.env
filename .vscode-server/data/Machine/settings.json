@@ -62,5 +62,10 @@
     // "XXX",
     // "[ ]",
     // "[x]"
-  ]
+  ],
+
+  // gitlens
+  "gitlens.ai.model": "openai:gpt-4o-mini",
+  "gitlens.ai.openai.url": "https://llm.kmou424.moe/v1/chat/completions",
+  "gitlens.ai.generateCommitMessage.customInstructions": "Please create a concise commit summary following the AngularJS commit message format. The summary should include the type (e.g., feat, fix, chore) and a scope, followed by a brief description of the changes made. The description should be limited to one sentence for clarity."
 }
