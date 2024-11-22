@@ -93,3 +93,45 @@ function _mount_smb -a mountpoint target
     sudo mount -t drvfs $target $mountpoint
   end
 end
+
+function confirm
+  set -l default_response $argv[1]
+  set -l prompt "Are you sure? [Y/n]: "
+
+  if test -z "$default_response"
+    set default_response "n"
+  end
+
+  if test "$default_response" = "y"
+    set prompt "Are you sure? [Y/n]: "
+  else if test "$default_response" = "n"
+    set prompt "Are you sure? [y/N]: "
+  end
+
+  while true
+    read -P "$prompt" response
+
+    if test -z "$response"
+      if test "$default_response" = "y"
+        echo "Yes"
+        return $true
+      else
+        echo "No"
+        return $false
+      end
+    end
+
+    set response (string lower "$response")
+
+    switch "$response"
+      case "y"
+        echo "Yes"
+        return $true
+      case "n"
+        echo "No"
+        return $false
+      case '*'
+        echo "Invalid input. Please enter 'y' or 'n'."
+    end
+  end
+end
