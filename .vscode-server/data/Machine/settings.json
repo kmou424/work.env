@@ -49,6 +49,15 @@
       "source.organizeImports": "explicit"
     }
   },
+  "go.inlayHints.assignVariableTypes": true,
+  "go.inlayHints.compositeLiteralFields": true,
+  "go.inlayHints.compositeLiteralTypes": true,
+  "go.inlayHints.functionTypeParameters": true,
+  "go.inlayHints.rangeVariableTypes": true,
+  "go.lintFlags": [
+    // ignore ST1001: should not use dot imports
+    "-ST1001"
+  ],
 
   "todo-tree.general.tags": [
     "BUG",
