@@ -25,6 +25,7 @@
   "prettier.tabWidth": 2,
   // remove semi for more concise code
   "prettier.semi": false,
+  "prettier.printWidth": 120,
 
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -67,7 +68,7 @@
   },
   "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
   "typescript.inlayHints.variableTypes.enabled": true,
-  "typescript.inlayHints.parameterNames.enabled": "literals",
+  // "typescript.inlayHints.parameterNames.enabled": "none",
   "typescript.inlayHints.enumMemberValues.enabled": true,
   "typescript.inlayHints.parameterTypes.enabled": true,
   "typescript.inlayHints.propertyDeclarationTypes.enabled": true,
