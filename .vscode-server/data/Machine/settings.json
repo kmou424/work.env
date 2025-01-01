@@ -7,6 +7,8 @@
   "editor.tabSize": 2,
   "editor.indentSize": "tabSize",
   "editor.insertSpaces": true,
+  "editor.lineHeight": 1.5,
+  "editor.fontLigatures": true,
 
   // theme
   "workbench.colorTheme": "JetBrains New UI Dark Theme",
@@ -21,7 +23,8 @@
 
   // prettier
   "prettier.tabWidth": 2,
-  "prettier.semi": true,
+  // remove semi for more concise code
+  "prettier.semi": false,
 
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -58,6 +61,20 @@
     // ignore ST1001: should not use dot imports
     "-ST1001"
   ],
+
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "typescript.inlayHints.variableTypes.enabled": true,
+  "typescript.inlayHints.parameterNames.enabled": "literals",
+  "typescript.inlayHints.enumMemberValues.enabled": true,
+  "typescript.inlayHints.parameterTypes.enabled": true,
+  "typescript.inlayHints.propertyDeclarationTypes.enabled": true,
+  "typescript.locale": "zh-CN",
+  "typescript.referencesCodeLens.enabled": true,
+  "typescript.referencesCodeLens.showOnAllFunctions": true,
+  "typescript.format.enable": false,
 
   "todo-tree.general.tags": [
     "BUG",
